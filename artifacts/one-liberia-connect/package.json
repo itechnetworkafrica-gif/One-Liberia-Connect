@@ -1,0 +1,32 @@
+{
+  "name": "@workspace/one-liberia-connect",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port ${PORT:-3000}",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0 --port ${PORT:-3000}",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
+    "tailwindcss": "catalog:"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "framer-motion": "catalog:",
+    "lucide-react": "catalog:",
+    "next": "^16.4.6",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-hook-form": "^7.90.0",
+    "zod": "catalog:"
+  }
+}

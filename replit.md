@@ -1,44 +1,51 @@
-# [Project name]
+# One Liberia Connect Website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Multi-page marketing site for One Liberia Connect, a division of One Liberia Enterprise Corporation, with community, school, diaspora, investor, and contact inquiry forms.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/one-liberia-connect run dev` — run the website
+- `pnpm --filter @workspace/one-liberia-connect run build` — create the production build
+- `pnpm --filter @workspace/one-liberia-connect run typecheck` — check TypeScript
+- `pnpm --filter @workspace/one-liberia-connect run lint` — run ESLint
+- Optional email delivery: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`
+- Optional canonical URL: `NEXT_PUBLIC_SITE_URL` (defaults to `https://1liberia.org`)
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Next.js App Router, React, TypeScript, Tailwind CSS
+- Framer Motion, lucide-react, react-hook-form, and Zod
+- Resend REST API for optional email delivery; no Replit-only application dependency
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/one-liberia-connect/app/` — routes, page metadata, form endpoint, and global layout
+- `artifacts/one-liberia-connect/components/` — shared UI and site navigation
+- `artifacts/one-liberia-connect/content/` — typed navigation and site copy
+- `artifacts/one-liberia-connect/public/images/` — supplied logo and photography
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The public pages use Next.js App Router for server-rendered content and page-specific metadata.
+- Inquiry forms share one Zod-validated route handler, with a honeypot and basic in-memory rate limiting.
+- If Resend settings are absent, the form returns a preview success response and logs only that email delivery is unconfigured; it does not persist or deliver the inquiry.
+- Email delivery uses the Resend HTTP API directly so the same settings work on Replit and Vercel.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Visitors can learn about the early-stage connectivity initiative, nominate a community, propose school or delivery partnerships, or send a general inquiry.
+- Use forward-looking language for planned services and hubs. The only approved figures are the 250,000-person ambition and the December 2026 feasibility-review commitment.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep site copy in typed content files and avoid claims not supported by the project brief.
+- The legal pages are draft language and must be reviewed before publication.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Configure all three Resend variables before relying on live form delivery. Preview fallback requests are not saved.
+- The user supplied the official logo and Liberia photos; prefer them over generic stock imagery.
+- Forms use `/forms/inquiries` as a proxy-safe public path and rewrite to the Next.js route handler under `/api`, because the workspace API service owns the `/api` prefix.
 
 ## Pointers
 

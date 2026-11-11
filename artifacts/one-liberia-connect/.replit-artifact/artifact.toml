@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "One Liberia Connect"
+description = "A multi-page website for One Liberia Connect that explains its community connectivity mission, welcomes school and diaspora partners, and collects community requests."
+version = "1.0.0"
+id = "artifacts/one-liberia-connect"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20344
+
+[services.development]
+run = "pnpm --filter @workspace/one-liberia-connect run dev"
+
+[services.production.build]
+args = ["pnpm", "--filter", "@workspace/one-liberia-connect", "run", "build"]
+
+[services.production.build.env]
+NODE_ENV = "production"
+
+[services.production.run]
+args = ["pnpm", "--filter", "@workspace/one-liberia-connect", "run", "start"]
+
+[services.production.run.env]
+PORT = "20344"
+NODE_ENV = "production"

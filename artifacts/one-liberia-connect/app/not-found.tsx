@@ -1,0 +1,3 @@
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+export default function NotFound(){return <main id="main" className="not-found"><div className="container"><span className="eyebrow">Page not found</span><h1>This path hasn’t<br/>been connected.</h1><p className="copy">The page may have moved, or the address may be incomplete. Let’s get you back to the right place.</p><div className="hero-actions"><Link className="btn btn-primary" href="/">Return home <ArrowRight size={16}/></Link><Link className="text-link" href="/connect-your-community"><ArrowLeft size={16}/> Connect your community</Link></div></div></main>}
