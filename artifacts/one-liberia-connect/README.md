@@ -11,7 +11,7 @@ pnpm install
 pnpm --filter @workspace/one-liberia-connect run dev
 ```
 
-The website uses Next.js App Router. `pnpm --filter @workspace/one-liberia-connect run build`, `lint`, and `typecheck` are available.
+The website uses Next.js App Router. `pnpm --filter @workspace/one-liberia-connect run build`, `lint`, and `typecheck` are available. The shared site font is WhatsApp Sans Var, loaded from WhatsApp's public static font URL.
 
 ## Inquiry form integration
 

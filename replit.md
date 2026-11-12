@@ -39,6 +39,7 @@ Multi-page marketing site for One Liberia Connect, a division of One Liberia Ent
 ## User preferences
 
 - Keep site copy in typed content files and avoid claims not supported by the project brief.
+- Use WhatsApp Sans Var consistently across the site and keep motion accessible with reduced-motion support.
 - The legal pages are draft language and must be reviewed before publication.
 
 ## Gotchas

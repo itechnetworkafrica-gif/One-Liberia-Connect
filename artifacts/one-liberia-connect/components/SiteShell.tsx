@@ -78,19 +78,30 @@ export function Header() {
 
 export function Footer() {
   const pathname = usePathname();
-  const links = [["Home","/"],["About Us","/about"],["Our Services","/our-services"],["Our Cause","/our-cause"],["Partners and Investors","/partners-and-investors"],["Contact","/contact"],["Connect Your Community","/connect-your-community"]];
+  const exploreLinks = [["About Us","/about"],["Our Services","/our-services"],["Our Cause","/our-cause"]];
+  const participateLinks = [["Connect Your Community","/connect-your-community"],["Partners and Investors","/partners-and-investors"],["Contact","/contact"]];
+  const footerContactLines = [
+    site.email,
+    site.phone && site.phone !== site.email ? `Phone: ${site.phone}` : undefined,
+    site.whatsapp && site.whatsapp !== site.email && site.whatsapp !== site.phone ? `WhatsApp: ${site.whatsapp}` : undefined,
+  ].filter((line): line is string => Boolean(line));
   const socialMark = (label: string) => {
     if (label === "LinkedIn") return <Linkedin size={16}/>;
     if (label === "Facebook") return <Facebook size={16}/>;
     if (label === "WhatsApp") return <MessageCircle size={16}/>;
     return <span className="social-x" aria-hidden="true">X</span>;
   };
-  return <footer className="footer">
+  return <footer className="footer" id="site-footer">
     <div className="container footer-main">
-      <div className="footer-brand"><div className="logo-card"><Image src="/images/logo.png" alt="One Liberia Connect" width={250} height={70}/></div><p>{site.parent}</p><strong>{site.tagline}</strong><p className="footer-note">Expanding access to learning and economic opportunity across Liberia.</p></div>
-      <div><h3>Explore</h3><div className="footer-links">{links.map(([label,href])=><Link className={pathname===href?"footer-active":""} href={href} key={href} aria-current={pathname===href?"page":undefined}>{label}</Link>)}</div></div>
-      <div><h3>Get in touch</h3><p className="footer-note">{site.email}</p><p className="footer-note">{site.phone}</p><p className="footer-note">WhatsApp: {site.whatsapp}</p><p className="footer-note">{site.location}</p><Link className="footer-email" href="/contact">Send us a message <ArrowUpRight size={15}/></Link><div className="footer-socials" aria-label="Social media links">{site.socials.map((social) => social.href ? <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>{socialMark(social.label)}</a> : <span key={social.label} className="social-placeholder" title={`${social.label} link to be added`} role="img" aria-label={`${social.label} link to be added`}>{socialMark(social.label)}</span>)}</div></div>
+      <div className="footer-brand"><div className="logo-card"><Image src="/images/logo.png" alt="One Liberia Connect" width={250} height={70} loading="eager"/></div><p>{site.parent}</p><strong>{site.tagline}</strong><p className="footer-note">Expanding access to learning and economic opportunity across Liberia.</p></div>
+       <div><h3>Explore</h3><div className="footer-links">{exploreLinks.map(([label,href])=><Link className={pathname===href?"footer-active":""} href={href} key={href} aria-current={pathname===href?"page":undefined}>{label}</Link>)}</div></div>
+       <div><h3>Get involved</h3><div className="footer-links">{participateLinks.map(([label,href])=><Link className={pathname===href?"footer-active":""} href={href} key={href} aria-current={pathname===href?"page":undefined}>{label}</Link>)}</div></div>
+       <div><h3>Get in touch</h3>{footerContactLines.map((line) => <p className="footer-note" key={line}>{line}</p>)}<p className="footer-note">{site.location}</p><Link className="footer-email" href="/contact">Send us a message <ArrowUpRight size={15}/></Link></div>
     </div>
-    <div className="container footer-bottom"><span>© {new Date().getFullYear()} One Liberia Enterprise Corporation</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms</Link><a href="#top">Back to top ↑</a></div></div>
+    <div className="container footer-bottom">
+      <span className="footer-copyright">© {new Date().getFullYear()} One Liberia Enterprise Corporation</span>
+      <div className="footer-legal-links"><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms</Link><Link href="/sitemap.xml">Sitemap</Link><a href="#top">Back to top ↑</a></div>
+      <div className="footer-socials" aria-label="Social media links">{site.socials.map((social) => social.href ? <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>{socialMark(social.label)}</a> : <span key={social.label} className="social-placeholder" title={`${social.label} link to be added`} role="img" aria-label={`${social.label} link to be added`}>{socialMark(social.label)}</span>)}</div>
+    </div>
   </footer>;
 }

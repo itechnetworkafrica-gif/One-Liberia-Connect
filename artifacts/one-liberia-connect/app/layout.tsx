@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Footer, Header } from "@/components/SiteShell";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-plus-jakarta",
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://1liberia.org";
 
@@ -55,7 +48,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={plusJakartaSans.variable}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
